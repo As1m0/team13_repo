@@ -1,0 +1,25 @@
+git init   --> Inicializálom(előkészítem) a mappát git használatra
+git status   -->Lekérem az akutális fájlok státuszát a mappában
+git add .    --> Hozzáadom a git repositoryhoz a gépemen az összes mappában lévő fájlt
+git add fáljnév   -->Adott fájlnevet adjuk hozzá
+git add *.kiterjesztés  -->Adott kiterjesztésű fájlokat adjuk hozzá
+git commit -m "Üzenet"   ->Adott megjegyzést fűzzük a repositorinkhoz a feltöltéskor
+
+
+Bejelentkeztetéshez, ezeket meg kell adni, és átdob egy login felületre
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+
+
+
+A végén a webes felületen megadott 3 paracsot kell megadni:
+$ git remote add origin https://github.com/CPTCyb/t13repo.git
+$ git branch -M main
+$ git push -u origin main
+
+
+
+Frissítéskor megadni:
+git add .
+git commit -m "Új üzenettel, ami leírja mit csináltál"
+git push
