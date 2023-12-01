@@ -1,0 +1,135 @@
+body {
+    background-color: #2e2d2e;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: .5s;
+}
+
+.container {
+    width: 800px;
+    margin: 70px auto;
+}
+
+#headLine {
+    background-color: black;
+    font-weight: bold;
+    font-size: 42px;
+    padding: 20px;
+    margin: 30px auto 20px auto;
+    letter-spacing: 2px;
+    color: white;
+    text-align: center;
+}
+
+.btn {
+    margin: 10px auto;
+    width: 300px;
+    padding: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    border: 2px solid white;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    transition: .2s;
+}
+
+#btn-save {
+    background-color: transparent;
+    opacity: 0;
+    transition: 0.3s;
+}
+
+#btn-export {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 100px;
+    font-size: 12px;
+    background-color: transparent;
+    display: none;
+    transition: 0.3s;
+}
+
+#btn-export:hover,
+#btn-save:hover {
+    color: black;
+    background-color: white;
+}
+
+.btn:hover {
+    cursor: pointer;
+    letter-spacing: 3px;
+}
+
+.btn:active {
+    filter: opacity(.3);
+    transition: .2s;
+}
+
+#saved-color-wrapper {
+    margin: 30px auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#colorSing {
+    text-transform: uppercase;
+    font-size: 35px;
+    transition: 1s;
+}
+
+#reset {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    font-size: 12px;
+    padding: 10px;
+    color: white;
+    text-decoration: none;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: none;
+    border: 1px solid white;
+    transition: .3s;
+    width: 120px;
+}
+
+#reset:hover {
+    color: black;
+    background-color: white;
+    letter-spacing: 3px;
+}
+
+#back {
+    position: relative;
+    display: inline;
+    filter: opacity(0);
+    color: white;
+    font-weight: bold;
+    left: 200px;
+    top: 40px;
+    padding: 10px;
+    transition: .3s;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#back:hover {
+    cursor: pointer;
+    color: rgba(255,255,255,.5);
+    left: 195px;
+}
+
+#back:active {
+    left: 200px;
+    color: white;
+}
