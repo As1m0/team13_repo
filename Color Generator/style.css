@@ -23,6 +23,7 @@ body {
 .btn {
     margin: 10px auto;
     width: 300px;
+    height: 20px;
     padding: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -48,6 +49,7 @@ body {
     bottom: 10px;
     right: 10px;
     width: 100px;
+    height: auto;
     font-size: 12px;
     background-color: transparent;
     display: none;
@@ -113,23 +115,55 @@ body {
     display: inline;
     filter: opacity(0);
     color: white;
-    font-weight: bold;
-    left: 200px;
-    top: 40px;
-    padding: 10px;
+    left: 195px;
+    height: 30px;
+    top: 41px;
+    padding: 10px 10px 11px 10px;
+    border-radius: 3px;
     transition: .3s;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    border: 2px solid white;
+    background-color: black;
 }
 
 #back:hover {
     cursor: pointer;
     color: rgba(255,255,255,.5);
-    left: 195px;
+    left: 192px;
 }
 
 #back:active {
     left: 200px;
+    color: white;
+}
+
+#forward {
+    position: relative;
+    display: inline;
+    filter: opacity(0);
+    color: white;
+    height: 30px;
+    top: 41px;
+    padding: 10px 10px 11px 10px;
+    left: 526px;
+    border-radius: 3px;
+    transition: .3s;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    border: 2px solid white;
+    background-color: black;
+}
+
+#forward:hover {
+    cursor: pointer;
+    color: rgba(255,255,255,.5);
+    left: 529px;
+}
+
+#forward:active {
+    left: 524px;
     color: white;
 }
