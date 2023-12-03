@@ -1,3 +1,9 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #2e2d2e;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -6,7 +12,7 @@ body {
 
 .container {
     width: 800px;
-    margin: 70px auto;
+    margin: 40px auto 0px auto;
 }
 
 #headLine {
@@ -23,7 +29,7 @@ body {
 .btn {
     margin: 10px auto;
     width: 300px;
-    height: 20px;
+    height: 45px;
     padding: 10px;
     text-transform: uppercase;
     letter-spacing: 2px;
@@ -42,6 +48,10 @@ body {
     background-color: transparent;
     opacity: 0;
     transition: 0.3s;
+}
+
+#btn-generate {
+    margin-top: 0px;
 }
 
 #btn-export {
@@ -93,6 +103,7 @@ body {
     bottom: 20px;
     font-size: 12px;
     padding: 10px;
+    width: 150px;
     color: white;
     text-decoration: none;
     letter-spacing: 2px;
@@ -101,7 +112,6 @@ body {
     display: none;
     border: 1px solid white;
     transition: .3s;
-    width: 120px;
 }
 
 #reset:hover {
@@ -115,9 +125,9 @@ body {
     display: inline;
     filter: opacity(0);
     color: white;
-    left: 195px;
+    left: 200px;
     height: 30px;
-    top: 41px;
+    top: 31px;
     padding: 10px 10px 11px 10px;
     border-radius: 3px;
     transition: .3s;
@@ -131,7 +141,7 @@ body {
 #back:hover {
     cursor: pointer;
     color: rgba(255,255,255,.5);
-    left: 192px;
+    left: 197px;
 }
 
 #back:active {
@@ -145,9 +155,9 @@ body {
     filter: opacity(0);
     color: white;
     height: 30px;
-    top: 41px;
+    top: 31px;
     padding: 10px 10px 11px 10px;
-    left: 526px;
+    left: 520px;
     border-radius: 3px;
     transition: .3s;
     -webkit-user-select: none;
@@ -160,10 +170,10 @@ body {
 #forward:hover {
     cursor: pointer;
     color: rgba(255,255,255,.5);
-    left: 529px;
+    left: 523px;
 }
 
 #forward:active {
-    left: 524px;
+    left: 520px;
     color: white;
 }
