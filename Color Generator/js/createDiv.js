@@ -65,6 +65,7 @@ buttonSave.addEventListener("click", function () {
         div.addEventListener("click", function () {
             if (exported === false) {
                 div.parentNode.removeChild(div);
+                document.body.style.backgroundColor = colorSing.style.color;
             } else {
                 div.innerHTML = "COPIED!";
                 navigator.clipboard.writeText(div.id);
@@ -77,7 +78,7 @@ buttonSave.addEventListener("click", function () {
                 buttonExport.style.display = "none";
             };
             //plus margin
-            if (exported === false && (document.getElementById("saved-color-wrapper").childElementCount = 1)) {
+            if (exported === false && (document.getElementById("saved-color-wrapper").childElementCount == 1)) {
                 plus.style.marginLeft = "10px";
             };
         });

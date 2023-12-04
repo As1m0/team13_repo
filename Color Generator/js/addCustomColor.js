@@ -60,7 +60,7 @@ inputBox.addEventListener("keypress", function () {
         div.innerHTML = inputField.value;
         div.style.border = "1px solid white";
         div.style.outline = "1px solid rgba(255,255,255,0.5)";
-        div.style.outlineOffset = "4px";
+        div.style.outlineOffset = "-5px";
         div.style.paddingTop = "5px";
         div.style.margin = "10px";
         div.style.borderRadius = "15%";
