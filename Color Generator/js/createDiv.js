@@ -73,9 +73,12 @@ buttonSave.addEventListener("click", function () {
             //export button display
             if (exported === false && (document.getElementById("saved-color-wrapper").childElementCount > 1)) {
                 buttonExport.style.display = "block";
-                plus.style.margin = "60px 10px";
             } else {
                 buttonExport.style.display = "none";
+            };
+            //plus margin
+            if (exported === false && (document.getElementById("saved-color-wrapper").childElementCount = 1)) {
+                plus.style.marginLeft = "10px";
             };
         });
     };

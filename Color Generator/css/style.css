@@ -242,6 +242,10 @@ body {
     width: 80%;
 }
 
+#input-field:focus {
+    outline: none;
+}
+
 #input-field:active {
     width: 80%;
 }
