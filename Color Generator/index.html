@@ -11,21 +11,31 @@
 <body>
 
     <div class="container">
-        <h1 id="headLine">Color Palette Generator<br><span id="colorSing" style="color: #6891d4;">PUSH TO GENERATE!</span></h1>
+        <h1 id="headLine">Color Palette Generator<br><span id="colorSing" style="color: #6891d4;">PUSH TO
+                GENERATE!</span></h1>
+                <p id="small-text">Add custom color</p>
         <div id="back"><</div>
-        <div id="forward">></div>
-        <div id="btn-generate" class="btn">Get random color</div>
-        <div id="btn-save" class="btn">Save current color</div>
-        <div id="saved-color-wrapper"></div>
-        <div id="btn-export" class="btn">Get my palette</div>
-        <a id="reset" target="_self" href="index.html">new palette</a>
-    </div>
+            <div id="forward">></div>
+            <div id="btn-generate" class="btn">Get random color</div>
+            <div id="btn-save" class="btn">Save current color</div>
+            <div id="saved-color-wrapper">
+                <div id="custom-color">
+                    <div id="plus">+</div>
+                    <div id="input-box">
+                        <p>Type your code:</p>
+                        <input type="text" id="input-field" maxlength="7"></input>
+                    </div>
+                </div>
+            </div>
+            <div id="btn-export" class="btn">Get my palette</div>
+            <a id="reset" target="_self" href="index.html">new palette></a>
 
 
-    <script src="js/javaScript.js"></script>
-    <script src="js/generateColor.js"></script>
-    <script src="js/createDiv.js"></script>
-    <script src="js/ExportPalette.js"></script>
+        <script src="js/javaScript.js"></script>
+        <script src="js/generateColor.js"></script>
+        <script src="js/createDiv.js"></script>
+        <script src="js/ExportPalette.js"></script>
+        <script src="js/addCustomColor.js"></script>
 </body>
 
 </html>

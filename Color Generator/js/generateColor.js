@@ -9,9 +9,9 @@ button.addEventListener("click", function () {
     buttonReset.style.display = "none";
     colorSing.style.filter = "opacity(1)";
     next.style.filter = "opacity(0)";
-    
+
     //export button dislpay
-    if ((document.getElementById("saved-color-wrapper").children.length) > 0) {
+    if ((document.getElementById("saved-color-wrapper").children.length) > 1) {
         buttonExport.style.display = "block";
     } else {
         buttonExport.style.display = "none";
@@ -48,6 +48,7 @@ previous.addEventListener("click", function () {
 
 //Go fowrad on colors
 next.addEventListener("click", function () {
+    previous.style.filter = "opacity(1)";
     if (j == (memory.length - 2)) {
         j++;
         colorSing.style.color = memory[j];

@@ -1,5 +1,6 @@
 //Export colors
 buttonExport.addEventListener("click", function () {
+  document.getElementById("custom-color").parentNode.removeChild(document.getElementById("custom-color"));
     //put saved color codes in array
     let colors = [];
     for (let i = (document.getElementById("saved-color-wrapper").children.length); i !== 0; i--) {
@@ -20,22 +21,9 @@ buttonExport.addEventListener("click", function () {
 
     exported = true;
 
-   //test secure
-   console.log(window.isSecureContext);
-   if (window.isSecureContext) {
-     console.log(
-       'The context is secure, can use navigator.clipboard',
-     );
-   } else {
-     console.log('The context is NOT secure');
-   }
-
-
     //copy array element to the clipboard
    // navigator.clipboard.writeText(colors);
-    navigator.clipboard
-    .writeText(colors)
-    .then(() => {
+    navigator.clipboard.writeText(colors).then(() => {
       console.log('The text has been copied');
     });
 });

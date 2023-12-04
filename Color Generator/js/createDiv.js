@@ -1,6 +1,7 @@
 //div element create
 buttonSave.addEventListener("click", function () {
     checkColors();
+    plus.style.marginLeft = "-60px";
     if (duplicates === true) {
         duplicates = false;
         //console.log("már volt ez e szin!");
@@ -22,12 +23,15 @@ buttonSave.addEventListener("click", function () {
         div.style.borderRadius = "15%";
         div.style.textAlign = "center";
         div.style.fontSize = "12px";
-        div.style.transition = "0.3s";
+        div.style.transition = "0.4s";
         div.style.userSelect = "none";
+        div.style.order = "2";
         document.getElementById("saved-color-wrapper").appendChild(div);
         div.id = colorSing.innerHTML;
         buttonExport.style.display = "block";
-        
+        div.style.filter = "opacity(0)";
+        sleep(50).then(() => { div.style.filter = "opacity(1)"; });
+
 
         //div hover actions
         div.addEventListener("mouseover", function () {
@@ -35,43 +39,57 @@ buttonSave.addEventListener("click", function () {
                 div.style.cursor = "pointer";
                 div.innerHTML = "delete";
                 div.style.filter = "opacity(0.6)";
+                document.body.style.backgroundColor = div.style.backgroundColor;
             } else {
                 div.style.cursor = "pointer";
                 div.innerHTML = "copy color code";
+                document.body.style.backgroundColor = div.style.backgroundColor;
             };
         });
 
         div.addEventListener("mouseout", function () {
-            div.innerHTML = div.id;
-            div.style.filter = "opacity(1)";
-            div.style.paddingTop = "5px";
-            div.style.fontSize = "12px";
+            if (exported === false) {
+                div.innerHTML = div.id;
+                div.style.filter = "opacity(1)";
+                div.style.paddingTop = "5px";
+                div.style.fontSize = "12px";
+                document.body.style.backgroundColor = colorSing.style.color;
+            } else {
+                div.innerHTML = div.id;
+                div.style.filter = "opacity(1)";
+                div.style.paddingTop = "5px";
+                div.style.fontSize = "12px";
+                document.body.style.backgroundColor = "#2e2d2e";
+            }
         });
 
         //remove or copy color div
-    div.addEventListener("click", function () {
-        if (exported === false) {
-            div.parentNode.removeChild(div);
-        } else {
-            div.innerHTML = "COPIED!";
-            navigator.clipboard.writeText(div.id);
-            div.style.filter = "opacity(0.5)";
-            div.style.fontSize = "16px";
-        };
-        //export button display
-        if (exported === false && (document.getElementById("saved-color-wrapper").childElementCount > 0)) {
-            buttonExport.style.display = "block";
-        } else {
-            buttonExport.style.display = "none";
-        };
+        div.addEventListener("click", function () {
+            if (exported === false) {
+                div.parentNode.removeChild(div);
+            } else {
+                div.innerHTML = "COPIED!";
+                navigator.clipboard.writeText(div.id);
+                div.style.filter = "opacity(0.5)";
+                div.style.fontSize = "16px";
+            };
+            //export button display
+            if (exported === false && (document.getElementById("saved-color-wrapper").childElementCount > 1)) {
+                buttonExport.style.display = "block";
+                plus.style.margin = "60px 10px";
+            } else {
+                buttonExport.style.display = "none";
+            };
         });
     };
 });
 
 function checkColors() {
-    if (document.getElementById("saved-color-wrapper").children.length > 0) {
-        for (let i = (document.getElementById("saved-color-wrapper").children.length); i !== 0; i--) {
-            if (document.querySelector("#saved-color-wrapper :nth-child(" + i + ")").innerHTML === colorSing.innerHTML) {
+    if (document.getElementById("saved-color-wrapper").children.length > 1) {
+        for (let i = (document.getElementById("saved-color-wrapper").children.length); i !== 1; i--) {
+            console.log(i);
+            console.log(document.querySelector("#saved-color-wrapper :nth-child(" + i + ")").style.backgroundColor);
+            if (document.querySelector("#saved-color-wrapper :nth-child(" + i + ")").style.backgroundColor === colorSing.style.color) {
                 duplicates = true;
             };
         };
