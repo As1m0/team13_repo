@@ -7,10 +7,14 @@ let submit = document.getElementById("submit");
 plus.addEventListener("mouseover", function () {
     document.getElementById("small-text").style.color = "white";
     document.getElementById("small-text").style.letterSpacing = "2px";
+    document.body.style.backgroundColor = "#2e2d2e";
 });
 plus.addEventListener("mouseout", function () {
     document.getElementById("small-text").style.color = "rgba(255,255,255,0)";
     document.getElementById("small-text").style.letterSpacing = "0px";
+    if (inputBox.style.display !== "block") {
+        document.body.style.backgroundColor = colorSing.style.color;
+    }
 });
 
 
@@ -21,6 +25,7 @@ plus.addEventListener("click", function () {
     inputField.focus();
     inputField.value = "#";
     sleep(50).then(() => { inputBox.style.filter = "opacity(1)"; });
+    document.body.style.backgroundColor = "#2e2d2e";
 });
 
 
@@ -53,7 +58,9 @@ inputBox.addEventListener("keypress", function () {
         div.style.color = "white";
         div.style.textTransform = "uppercase";
         div.innerHTML = inputField.value;
-        div.style.border = "2px dotted white";
+        div.style.border = "1px solid white";
+        div.style.outline = "1px solid rgba(255,255,255,0.5)";
+        div.style.outlineOffset = "4px";
         div.style.paddingTop = "5px";
         div.style.margin = "10px";
         div.style.borderRadius = "15%";
@@ -75,12 +82,14 @@ inputBox.addEventListener("keypress", function () {
         sleep(200).then(() => { plus.style.display = "block"; plus.style.filter = "opacity(0)" });
         sleep(500).then(() => { plus.style.display = "block"; plus.style.filter = "opacity(1)" });
 
+        document.body.style.backgroundColor = colorSing.style.color;
+
         //div hover actions
         div.addEventListener("mouseover", function () {
             if (exported === false) {
                 div.style.cursor = "pointer";
-                div.innerHTML = "delete";
-                div.style.filter = "opacity(0.6)";
+                div.style.paddingTop = "20px";
+                div.innerHTML = "remove";
                 document.body.style.backgroundColor = div.style.backgroundColor;
             } else {
                 div.style.cursor = "pointer";
@@ -90,7 +99,6 @@ inputBox.addEventListener("keypress", function () {
 
         div.addEventListener("mouseout", function () {
             div.innerHTML = div.id;
-            div.style.filter = "opacity(1)";
             div.style.paddingTop = "5px";
             div.style.fontSize = "12px";
             document.body.style.backgroundColor = colorSing.style.color;
@@ -103,7 +111,6 @@ inputBox.addEventListener("keypress", function () {
             } else {
                 div.innerHTML = "COPIED!";
                 navigator.clipboard.writeText(div.id);
-                div.style.filter = "opacity(0.5)";
                 div.style.fontSize = "16px";
             };
             //export button display

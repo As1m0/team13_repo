@@ -37,8 +37,8 @@ buttonSave.addEventListener("click", function () {
         div.addEventListener("mouseover", function () {
             if (exported === false) {
                 div.style.cursor = "pointer";
-                div.innerHTML = "delete";
-                div.style.filter = "opacity(0.6)";
+                div.style.paddingTop = "20px";
+                div.innerHTML = "remove";
                 document.body.style.backgroundColor = div.style.backgroundColor;
             } else {
                 div.style.cursor = "pointer";
@@ -50,13 +50,11 @@ buttonSave.addEventListener("click", function () {
         div.addEventListener("mouseout", function () {
             if (exported === false) {
                 div.innerHTML = div.id;
-                div.style.filter = "opacity(1)";
                 div.style.paddingTop = "5px";
                 div.style.fontSize = "12px";
                 document.body.style.backgroundColor = colorSing.style.color;
             } else {
                 div.innerHTML = div.id;
-                div.style.filter = "opacity(1)";
                 div.style.paddingTop = "5px";
                 div.style.fontSize = "12px";
                 document.body.style.backgroundColor = "#2e2d2e";
@@ -70,7 +68,6 @@ buttonSave.addEventListener("click", function () {
             } else {
                 div.innerHTML = "COPIED!";
                 navigator.clipboard.writeText(div.id);
-                div.style.filter = "opacity(0.5)";
                 div.style.fontSize = "16px";
             };
             //export button display

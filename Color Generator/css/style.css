@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #2e2d2e;
+    background-color: #6891d4;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     transition: .5s;
 }
@@ -125,7 +125,7 @@ body {
     display: inline;
     filter: opacity(0);
     color: white;
-    left: 200px;
+    left: 205px;
     height: 30px;
     top: 31px;
     padding: 10px 10px 11px 10px;
@@ -134,18 +134,18 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 2px solid white;
+    border: 1px solid white;
     background-color: transparent;
 }
 
 #back:hover {
     cursor: pointer;
     color: rgba(255, 255, 255, .5);
-    left: 197px;
+    left: 200px;
 }
 
 #back:active {
-    left: 200px;
+    left: 205px;
     color: white;
 }
 
@@ -163,14 +163,14 @@ body {
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    border: 2px solid white;
+    border: 1px solid white;
     background-color: transparent;
 }
 
 #forward:hover {
     cursor: pointer;
     color: rgba(255, 255, 255, .5);
-    left: 523px;
+    left: 525px;
 }
 
 #forward:active {
@@ -195,13 +195,18 @@ body {
 #plus:hover {
     cursor: pointer;
     filter: opacity(0.6);
-    transform: scale(1.2);
+    width: 150px;
+    height: 150px;
+    border-radius: 15%;
+    transform: translateY(0);
+    /*padding-top: 55px;*/
+    margin: 0 10px;
+    padding-top: 20px;
 }
 
 #plus:active {
     cursor: pointer;
     filter: opacity(1);
-    transform: scale(0.7);
 }
 
 #input-box {
@@ -218,6 +223,7 @@ body {
     border: 1px solid white;
     font-size: 12px;
     transition: .3s;
+    margin: 10px;
 }
 
 #input-field {
