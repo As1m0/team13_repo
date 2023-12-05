@@ -231,23 +231,31 @@ body {
     text-align: center;
     width: 70%;
     background-color: transparent;
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     border-radius: 5%;
     color: white;
     padding: 5px;
     transition: .3s;
 }
 
-#input-field:hover {
+input:hover {
     width: 80%;
 }
 
-#input-field:focus {
+input:focus {
     outline: none;
 }
 
-#input-field:active {
+input:active {
     width: 80%;
+}
+
+input:valid {
+    border: 1px solid green;
+}
+
+input:invalid {
+    border: 1px solid red;
 }
 
 #small-text {
