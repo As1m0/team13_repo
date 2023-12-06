@@ -7,6 +7,7 @@ let randomBlue = document.getElementById("random-blue");
 
 //animations
 rainbow.addEventListener("mouseover", function () {
+    wrapper.style.gap = "30px";
     sleep(200).then(() => { rainbow.style.display = "none"; });
     wrapper.style.display = "flex";
     sleep(100).then(() => { randomRed.style.filter = "opacity(1)"; });
@@ -15,6 +16,18 @@ rainbow.addEventListener("mouseover", function () {
     sleep(600).then(() => { wrapper.style.borderColor = "white"; });
 });
 
+
+colorWrapper.addEventListener("mouseleave", function () {
+    rainbow.style.filter = "opacity(0)";
+    wrapper.style.gap = "-0px";
+    randomBlue.style.filter = "opacity(0)";
+    randomGreen.style.filter = "opacity(0)";
+    randomRed.style.filter = "opacity(0)";
+    wrapper.style.borderColor = "transparent";
+    sleep(300).then(() => { wrapper.style.display = "none"; });
+    sleep(300).then(() => { rainbow.style.display = "block"; });
+    sleep(100).then(() => { rainbow.style.filter = "opacity(0.7)"; });
+})
 //generate colors
 
 randomRed.addEventListener("click", function () {

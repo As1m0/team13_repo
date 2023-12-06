@@ -279,17 +279,18 @@ input:invalid {
     height: 35px;
     background-image: conic-gradient(red,orange,yellow,green,blue,violet,red);
     border-radius: 35px;
-    transition: .3s;
+    transition: .4s;
     border: 1px solid white;
-    filter: opacity(0.6);
+    filter: opacity(0.7);
     box-shadow: 0px 0px 5px #e4ff00;
     box-shadow: 0px 0px 7px #ff9c00;
 }
 
 #rainbow:hover {
-    transform: scale(2);
+    transform: scale(8);
     cursor: pointer;
     filter: opacity(0);
+    border: none;
 }
 
 #wrapper {
