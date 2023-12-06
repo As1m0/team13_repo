@@ -18,6 +18,7 @@ buttonExport.addEventListener("click", function () {
     next.style.display = "none";
     button.style.display = "none";
     buttonSave.style.display = "none";
+    document.getElementById("colorwheel-wrapper").style.display = "none";
 
     exported = true;
 

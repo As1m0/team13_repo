@@ -12,7 +12,7 @@ body {
 
 .container {
     width: 800px;
-    margin: 40px auto 0px auto;
+    margin: 20px auto 0px auto;
 }
 
 #headLine {
@@ -20,7 +20,7 @@ body {
     font-weight: bold;
     font-size: 42px;
     padding: 20px;
-    margin: 30px auto 20px auto;
+    margin: 10px auto 10px auto;
     letter-spacing: 2px;
     color: white;
     text-align: center;
@@ -258,11 +258,85 @@ input:invalid {
     border: 1px solid red;
 }
 
-#small-text {
-    margin: 0px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0);
-    font-size: 16px;
-    text-align: center;
+#colorwheel-wrapper {
+    margin: 0px auto;
+    height: 47px;
+    width: 200px;
     transition: .3s;
+    overflow: hidden;
+}
+
+#colorwheel-wrapper:hover {
+    width: 300px;
+}
+
+#rainbow {
+    display: block;
+    position: relative;
+    top: 5px;
+    margin: 0px auto;
+    width: 35px;
+    height: 35px;
+    background-image: conic-gradient(red,orange,yellow,green,blue,indigo,violet);
+    border-radius: 35px;
+    transition: .3s;
+    border: 1px solid white;
+}
+
+#rainbow:hover {
+    transform: scale(2);
+    cursor: pointer;
+    filter: opacity(0);
+}
+
+#wrapper {
+    display: none;
+    /*display: flex;*/
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    border: 1px solid transparent;
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: .3s;
+}
+
+#wrapper:hover{
+    gap: 40px;
+}
+
+.color{
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    transition: .3s;
+    border: 1px solid white;
+}
+
+.color:hover {
+    transform: scale(1.5);
+    cursor: pointer;
+
+}
+
+.color:active{
+    transform: scale(1);
+    filter: opacity(0.6);
+}
+
+#random-red {
+    background-image: radial-gradient( #ff9c00,#ff00ba);
+    filter: opacity(0);
+}
+
+#random-green {
+    background-image: radial-gradient( #00ffde,#e4ff00);
+    filter: opacity(0);
+}
+
+#random-blue {
+    background-image: radial-gradient( #b400ff,#00e4ff);
+    filter: opacity(0);
 }

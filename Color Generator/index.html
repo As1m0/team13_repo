@@ -13,7 +13,14 @@
     <div class="container">
         <h1 id="headLine">Color Palette Generator<br><span id="colorSing" style="color: #6891d4;">PUSH TO
                 GENERATE!</span></h1>
-                <p id="small-text">Add custom color</p>
+                <div id="colorwheel-wrapper">
+                    <div id="rainbow"></div>
+                    <div id="wrapper">
+                        <div id="random-red" class="color"></div>
+                        <div id="random-green" class="color"></div>
+                        <div id="random-blue" class="color"></div>
+                    </div>
+                </div>
         <div id="back"><</div>
             <div id="forward">></div>
             <div id="btn-generate" class="btn">Get random color</div>
@@ -32,6 +39,7 @@
 
 
         <script src="js/javaScript.js"></script>
+        <script src="js/rainbowColors.js"></script>
         <script src="js/generateColor.js"></script>
         <script src="js/createDiv.js"></script>
         <script src="js/ExportPalette.js"></script>

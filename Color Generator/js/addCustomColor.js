@@ -5,18 +5,13 @@ let submit = document.getElementById("submit");
 
 //plus button hover effects
 plus.addEventListener("mouseover", function () {
-    document.getElementById("small-text").style.color = "white";
-    document.getElementById("small-text").style.letterSpacing = "2px";
     document.body.style.backgroundColor = "#2e2d2e";
 });
 plus.addEventListener("mouseout", function () {
-    document.getElementById("small-text").style.color = "rgba(255,255,255,0)";
-    document.getElementById("small-text").style.letterSpacing = "0px";
     if (inputBox.style.display !== "block") {
         document.body.style.backgroundColor = colorSing.style.color;
     }
 });
-
 
 //color box appear
 plus.addEventListener("click", function () {
@@ -27,7 +22,6 @@ plus.addEventListener("click", function () {
     sleep(50).then(() => { inputBox.style.filter = "opacity(1)"; });
     document.body.style.backgroundColor = "#2e2d2e";
 });
-
 
 //color box close
 if (inputBox.style.filter = "opacity(1)") {
@@ -43,10 +37,8 @@ if (inputBox.style.filter = "opacity(1)") {
         } while (targetEl);
         plus.style.display = "block";
         inputBox.style.display = "none";
-        console.log("Clicked outside!");
     });
 }
-
 
 //create custom div
 inputBox.addEventListener("keypress", function () {

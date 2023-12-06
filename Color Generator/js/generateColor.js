@@ -23,6 +23,14 @@ button.addEventListener("click", function () {
     if (j > 0) {
         previous.style.filter = "opacity(1)";
     };
+
+    //rainbow color-wrapper set back
+    sleep(100).then(() => { randomBlue.style.filter = "opacity(0)"; });
+    sleep(150).then(() => { randomGreen.style.filter = "opacity(0)"; });
+    sleep(300).then(() => { randomRed.style.filter = "opacity(0)"; });
+    sleep(250).then(() => { wrapper.style.borderColor = "transparent"; });
+    sleep(300).then(() => { wrapper.style.display = "none"; });
+    sleep(300).then(() => { rainbow.style.display = "block"; });
 });
 
 //Go back on colors
