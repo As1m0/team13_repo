@@ -5,7 +5,7 @@
 }
 
 body {
-    background-color: #6891d4;
+    background-color: #2e2d2e;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     transition: .5s;
 }
@@ -277,10 +277,13 @@ input:invalid {
     margin: 0px auto;
     width: 35px;
     height: 35px;
-    background-image: conic-gradient(red,orange,yellow,green,blue,indigo,violet);
+    background-image: conic-gradient(red,orange,yellow,green,blue,violet,red);
     border-radius: 35px;
     transition: .3s;
     border: 1px solid white;
+    filter: opacity(0.6);
+    box-shadow: 0px 0px 5px #e4ff00;
+    box-shadow: 0px 0px 7px #ff9c00;
 }
 
 #rainbow:hover {
@@ -305,6 +308,7 @@ input:invalid {
 
 #wrapper:hover{
     gap: 40px;
+    background-color: #111111;
 }
 
 .color{
@@ -318,7 +322,8 @@ input:invalid {
 .color:hover {
     transform: scale(1.5);
     cursor: pointer;
-
+    box-shadow: 0px 0px 5px #e4ff00;
+    box-shadow: 0px 0px 7px #ff9c00;
 }
 
 .color:active{

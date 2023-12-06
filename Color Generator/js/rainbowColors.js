@@ -102,7 +102,8 @@ function RandomRed() {
     let r = 255;
     let g = Math.round(Math.random() * 225);
     let b = Math.round(Math.random() * 225);
-    return ("rgb(" + r + "," + g + "," + b +")");
+    return rgbToHex(r, g, b);
+    //return ("rgb(" + r + "," + g + "," + b +")");
 
 }
 
@@ -110,13 +111,21 @@ function RandomGreen() {
     let r = Math.round(Math.random() * 225);
     let g = 255;
     let b = Math.round(Math.random() * 225);
-    //let o = (Math.random() * (1.5) + 0.5).toFixed(1);
-    return ("rgb(" + r + "," + g + "," + b +")");
+    return rgbToHex(r, g, b);
 }
 
 function RandomBlue() {
     let r = Math.round(Math.random() * 225);
     let g = Math.round(Math.random() * 125);
     let b = 255;
-    return ("rgb(" + r + "," + g + "," + b +")");
+    return rgbToHex(r, g, b);
+}
+
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
 }
