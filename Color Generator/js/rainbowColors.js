@@ -20,14 +20,13 @@ rainbow.addEventListener("mouseover", function () {
     sleep(300).then(() => { randomYellow.style.filter = "opacity(1)"; });
     sleep(350).then(() => { randomOrange.style.filter = "opacity(1)"; });
     sleep(550).then(() => { wrapper.style.borderColor = "white"; });
-    sleep(800).then(() => {
+    sleep(550).then(() => {
         var elements = document.getElementsByClassName('color');
         for (var i = 0; i < elements.length; i++) {
             elements[i].style.borderColor = 'white';
         }
     })
 })
-
 colorWrapper.addEventListener("mouseleave", function () {
     rainbow.style.filter = "opacity(0)";
     wrapper.style.gap = "-0px";
@@ -126,31 +125,131 @@ randomBlue.addEventListener("click", function () {
         previous.style.filter = "opacity(1)";
     }
 })
+randomPurple.addEventListener("click", function () {
+    hexa = RandomPurple();
+    colorSing.style.color = hexa;
+    colorSing.textContent = hexa;
+    document.body.style.backgroundColor = hexa;
+
+    buttonSave.style.opacity = "1"
+    buttonReset.style.display = "none";
+    colorSing.style.filter = "opacity(1)";
+    next.style.filter = "opacity(0)";
+
+    //export button dislpay
+    if ((document.getElementById("saved-color-wrapper").children.length) > 1) {
+        buttonExport.style.display = "block";
+    } else {
+        buttonExport.style.display = "none";
+    }
+
+    //write color code to memory
+    j++;
+    memory[j] = hexa;
+    if (j > 0) {
+        previous.style.filter = "opacity(1)";
+    }
+})
+
+randomYellow.addEventListener("click", function () {
+    hexa = RandomYellow();
+    colorSing.style.color = hexa;
+    colorSing.textContent = hexa;
+    document.body.style.backgroundColor = hexa;
+
+    buttonSave.style.opacity = "1"
+    buttonReset.style.display = "none";
+    colorSing.style.filter = "opacity(1)";
+    next.style.filter = "opacity(0)";
+
+    //export button dislpay
+    if ((document.getElementById("saved-color-wrapper").children.length) > 1) {
+        buttonExport.style.display = "block";
+    } else {
+        buttonExport.style.display = "none";
+    }
+
+    //write color code to memory
+    j++;
+    memory[j] = hexa;
+    if (j > 0) {
+        previous.style.filter = "opacity(1)";
+    }
+})
+
+randomOrange.addEventListener("click", function () {
+    hexa = RandomOrange();
+    colorSing.style.color = hexa;
+    colorSing.textContent = hexa;
+    document.body.style.backgroundColor = hexa;
+
+    buttonSave.style.opacity = "1"
+    buttonReset.style.display = "none";
+    colorSing.style.filter = "opacity(1)";
+    next.style.filter = "opacity(0)";
+
+    //export button dislpay
+    if ((document.getElementById("saved-color-wrapper").children.length) > 1) {
+        buttonExport.style.display = "block";
+    } else {
+        buttonExport.style.display = "none";
+    }
+
+    //write color code to memory
+    j++;
+    memory[j] = hexa;
+    if (j > 0) {
+        previous.style.filter = "opacity(1)";
+    }
+})
 
 
 
 
 function RandomRed() {
     let r = 255;
-    let g = Math.round(Math.random() * 225);
-    let b = Math.round(Math.random() * 225);
+    let g = 0;
+    let b = Math.round(Math.random() * (130))+0;
     return rgbToHex(r, g, b);
     //return ("rgb(" + r + "," + g + "," + b +")");
 }
 
 function RandomGreen() {
-    let r = Math.round(Math.random() * 225);
-    let g = 255;
-    let b = Math.round(Math.random() * 225);
+    let r = Math.round(Math.random() * (130))+0;
+    let g = Math.round(Math.random() * (125))+130;
+    let b = 0;
     return rgbToHex(r, g, b);
 }
 
 function RandomBlue() {
-    let r = Math.round(Math.random() * 225);
-    let g = Math.round(Math.random() * 125);
+    let r = Math.round(Math.random() * (130))+0;
+    let g = Math.round(Math.random() * (130))+0;
     let b = 255;
     return rgbToHex(r, g, b);
 }
+
+function RandomPurple() {
+    let r = Math.round(Math.random() * (125))+130;
+    let g = 0;
+    let b = Math.round(Math.random() * (125))+130;
+    return rgbToHex(r, g, b);
+}
+
+function RandomYellow() {
+    let r = Math.round(Math.random() * (125))+130;
+    let g = Math.round(Math.random() * (125))+130;
+    let b = 0;
+    return rgbToHex(r, g, b);
+}
+
+function RandomOrange() {
+    let r = 255;
+    let g = Math.round(Math.random() * (130))+0;
+    let b = 0;
+    return rgbToHex(r, g, b);
+}
+
+
 
 function componentToHex(c) {
     var hex = c.toString(16);
