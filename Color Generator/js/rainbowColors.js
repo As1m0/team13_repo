@@ -28,7 +28,6 @@ rainbow.addEventListener("mouseover", function () {
     })
 })
 colorWrapper.addEventListener("mouseleave", function () {
-    rainbow.style.filter = "opacity(0)";
     wrapper.style.gap = "-0px";
     randomBlue.style.filter = "opacity(0)";
     randomGreen.style.filter = "opacity(0)";
@@ -39,7 +38,6 @@ colorWrapper.addEventListener("mouseleave", function () {
     wrapper.style.borderColor = "transparent";
     sleep(300).then(() => { wrapper.style.display = "none"; });
     sleep(300).then(() => { rainbow.style.display = "block"; });
-    sleep(100).then(() => { rainbow.style.filter = "opacity(0.7)"; });
     var elements = document.getElementsByClassName('color');
     for (var i = 0; i < elements.length; i++) {
         elements[i].style.borderColor = 'transparent';

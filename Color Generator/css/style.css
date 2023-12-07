@@ -261,13 +261,9 @@ input:invalid {
 #colorwheel-wrapper {
     margin: 0px auto;
     height: 47px;
-    width: 200px;
+    width: 450px;
     transition: .3s;
     overflow: hidden;
-}
-
-#colorwheel-wrapper:hover {
-    width: 450px;
 }
 
 #rainbow {
@@ -294,7 +290,7 @@ input:invalid {
 }
 
 #wrapper {
-    display: flex;
+    display: none;
     /*display: flex;*/
     flex-direction: row;
     flex-wrap: nowrap;
