@@ -4,18 +4,29 @@ let wrapper = document.getElementById("wrapper");
 let randomRed = document.getElementById("random-red");
 let randomGreen = document.getElementById("random-green");
 let randomBlue = document.getElementById("random-blue");
+let randomPurple = document.getElementById("random-purple");
+let randomYellow = document.getElementById("random-yellow");
+let randomOrange = document.getElementById("random-orange");
 
 //animations
 rainbow.addEventListener("mouseover", function () {
-    wrapper.style.gap = "30px";
+    wrapper.style.gap = "40px";
     sleep(200).then(() => { rainbow.style.display = "none"; });
     wrapper.style.display = "flex";
     sleep(100).then(() => { randomRed.style.filter = "opacity(1)"; });
-    sleep(300).then(() => { randomGreen.style.filter = "opacity(1)"; });
-    sleep(400).then(() => { randomBlue.style.filter = "opacity(1)"; });
-    sleep(600).then(() => { wrapper.style.borderColor = "white"; });
-});
-
+    sleep(150).then(() => { randomPurple.style.filter = "opacity(1)"; });
+    sleep(200).then(() => { randomBlue.style.filter = "opacity(1)"; });
+    sleep(250).then(() => { randomGreen.style.filter = "opacity(1)"; });
+    sleep(300).then(() => { randomYellow.style.filter = "opacity(1)"; });
+    sleep(350).then(() => { randomOrange.style.filter = "opacity(1)"; });
+    sleep(550).then(() => { wrapper.style.borderColor = "white"; });
+    sleep(800).then(() => {
+        var elements = document.getElementsByClassName('color');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].style.borderColor = 'white';
+        }
+    })
+})
 
 colorWrapper.addEventListener("mouseleave", function () {
     rainbow.style.filter = "opacity(0)";
@@ -23,13 +34,21 @@ colorWrapper.addEventListener("mouseleave", function () {
     randomBlue.style.filter = "opacity(0)";
     randomGreen.style.filter = "opacity(0)";
     randomRed.style.filter = "opacity(0)";
+    randomPurple.style.filter = "opacity(0)";
+    randomYellow.style.filter = "opacity(0)";
+    randomOrange.style.filter = "opacity(0)";
     wrapper.style.borderColor = "transparent";
     sleep(300).then(() => { wrapper.style.display = "none"; });
     sleep(300).then(() => { rainbow.style.display = "block"; });
     sleep(100).then(() => { rainbow.style.filter = "opacity(0.7)"; });
+    var elements = document.getElementsByClassName('color');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].style.borderColor = 'transparent';
+    }
 })
-//generate colors
 
+
+//generate colors
 randomRed.addEventListener("click", function () {
     hexa = RandomRed();
     colorSing.style.color = hexa;
@@ -46,15 +65,15 @@ randomRed.addEventListener("click", function () {
         buttonExport.style.display = "block";
     } else {
         buttonExport.style.display = "none";
-    };
+    }
 
     //write color code to memory
     j++;
     memory[j] = hexa;
     if (j > 0) {
         previous.style.filter = "opacity(1)";
-    };
-});
+    }
+})
 
 randomGreen.addEventListener("click", function () {
     hexa = RandomGreen();
@@ -72,15 +91,15 @@ randomGreen.addEventListener("click", function () {
         buttonExport.style.display = "block";
     } else {
         buttonExport.style.display = "none";
-    };
+    }
 
     //write color code to memory
     j++;
     memory[j] = hexa;
     if (j > 0) {
         previous.style.filter = "opacity(1)";
-    };
-});
+    }
+})
 
 randomBlue.addEventListener("click", function () {
     hexa = RandomBlue();
@@ -98,15 +117,15 @@ randomBlue.addEventListener("click", function () {
         buttonExport.style.display = "block";
     } else {
         buttonExport.style.display = "none";
-    };
+    }
 
     //write color code to memory
     j++;
     memory[j] = hexa;
     if (j > 0) {
         previous.style.filter = "opacity(1)";
-    };
-});
+    }
+})
 
 
 
@@ -117,7 +136,6 @@ function RandomRed() {
     let b = Math.round(Math.random() * 225);
     return rgbToHex(r, g, b);
     //return ("rgb(" + r + "," + g + "," + b +")");
-
 }
 
 function RandomGreen() {

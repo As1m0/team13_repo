@@ -267,7 +267,7 @@ input:invalid {
 }
 
 #colorwheel-wrapper:hover {
-    width: 300px;
+    width: 450px;
 }
 
 #rainbow {
@@ -279,7 +279,7 @@ input:invalid {
     height: 35px;
     background-image: conic-gradient(red,orange,yellow,green,blue,violet,red);
     border-radius: 35px;
-    transition: .4s;
+    transition: .5s;
     border: 1px solid white;
     filter: opacity(0.7);
     box-shadow: 0px 0px 5px #e4ff00;
@@ -287,20 +287,20 @@ input:invalid {
 }
 
 #rainbow:hover {
-    transform: scale(8);
+    transform: scale(12);
     cursor: pointer;
     filter: opacity(0);
     border: none;
 }
 
 #wrapper {
-    display: none;
+    display: flex;
     /*display: flex;*/
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
-    gap: 30px;
+    gap: 50px;
     border: 1px solid transparent;
     padding: 10px 20px;
     border-radius: 50px;
@@ -317,7 +317,7 @@ input:invalid {
     height: 25px;
     border-radius: 25px;
     transition: .3s;
-    border: 1px solid white;
+    border: 1px solid transparent;
 }
 
 .color:hover {
@@ -333,16 +333,31 @@ input:invalid {
 }
 
 #random-red {
-    background-image: radial-gradient( #ff9c00,#ff00ba);
+    background-image: linear-gradient( rgb(255,0,0),rgb(255,0,130));
     filter: opacity(0);
 }
 
-#random-green {
-    background-image: radial-gradient( #00ffde,#e4ff00);
+#random-purple {
+    background-image: linear-gradient( rgb(130,0,130),rgb(255,0,255));
     filter: opacity(0);
 }
 
 #random-blue {
-    background-image: radial-gradient( #b400ff,#00e4ff);
+    background-image: linear-gradient( rgb(0,130,255),rgb(130,255,255));
+    filter: opacity(0);
+}
+
+#random-green {
+    background-image: linear-gradient( rgb(0,130,0),rgb(130,255,0));
+    filter: opacity(0);
+}
+
+#random-yellow {
+    background-image: linear-gradient( rgb(130,130,0),rgb(255,255,0));
+    filter: opacity(0);
+}
+
+#random-orange {
+   background-image: linear-gradient(  rgb(255,0,0),rgb(255,130,0));
     filter: opacity(0);
 }
