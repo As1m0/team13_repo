@@ -44,7 +44,7 @@ const Dolgozok = [{
 
 function koltseg(Dolgozok){
 	let osszeg=0;
-	for (i=0; i<Dolgozok.length; i++){
+	for (let i=0; i<Dolgozok.length; i++){
     osszeg+=Dolgozok[i].fizetes;
     }
     return osszeg;
@@ -55,7 +55,7 @@ document.write("Dolgozók összbére: "+koltseg(Dolgozok).toLocaleString()+" Ft<
 function legmagasabbBer(Dolgozok){
 	let maxBer=0;
     let dolgozo="";
-	for (i=0; i<Dolgozok.length; i++){
+	for (let i=0; i<Dolgozok.length; i++){
     	if (maxBer<Dolgozok[i].fizetes){
         maxBer=Dolgozok[i].fizetes;
         dolgozo=Dolgozok[i].nev;
@@ -69,7 +69,7 @@ document.write("A legtöbbet kereső dolgozó: "+legmagasabbBer(Dolgozok)+"<hr>"
 function legfiatalabb(Dolgozok){
 	let legfiatalabb="";
     let kor=Dolgozok[0].kor;
-    for (i=1; i<Dolgozok.length; i++){
+    for (let i=1; i<Dolgozok.length; i++){
     	if (kor>Dolgozok[i].kor){
         	kor=Dolgozok[i].kor;
             legfiatalabb=Dolgozok[i].nev;
@@ -127,7 +127,6 @@ document.write("A legidősebb dolgozó: "+legidosebb(Dolgozok)+"<hr>");
 
 function nyugdijEv(Dolgozok) {
 	for (let i=0; i<Dolgozok.length; i++){
-    	console.log(Dolgozok[i].nev);
 		if (legidosebb(Dolgozok)==Dolgozok[i].nev){
     	return 65-Dolgozok[i].kor;
     	}
