@@ -83,8 +83,8 @@ document.write("A legfiatalabb dolgozó: "+legfiatalabb(Dolgozok)+"<hr>");
 function emelesLegfiatalabbnak(Dolgozok){
 	for (let i=0; i<Dolgozok.length; i++){
     	if (legfiatalabb(Dolgozok)==Dolgozok[i].nev){
-        	let ujfizetes = Dolgozok[i].fizetes += 30000;
-            document.write("A legfiatalabb dolgozó emelt fizetése: "+ujfizetes.toLocaleString()+" Ft<hr>")
+        	Dolgozok[i].fizetes += 30000;
+            document.write("A legfiatalabb dolgozó emelt fizetése: "+Dolgozok[i].fizetes.toLocaleString()+" Ft<hr>")
         }
     }
 }
@@ -101,8 +101,8 @@ document.write("Átlagkereset: "+atlagKereset(Dolgozok).toLocaleString()+" Ft<hr
 function emelesAtlagAlattiaknak(Dolgozok){
 	for (let i=0; i<Dolgozok.length; i++){
     	if (Dolgozok[i].fizetes < atlagKereset(Dolgozok)){
-        	Dolgozok[i].fizetes = Dolgozok[i].fizetes*1.3;
-            document.write("Emelést kapott: "+Dolgozok[i].nev+", új fizetés: "+Dolgozok[i].fizetes+" Ft<br>")
+        	Dolgozok[i].fizetes *= 1.1;
+            document.write("Emelést kapott: "+Dolgozok[i].nev+", új fizetés: "+Dolgozok[i].fizetes.toLocaleString()+" Ft<br>")
         }
     }
 }
@@ -113,7 +113,7 @@ emelesAtlagAlattiaknak(Dolgozok);
 function legidosebb(Dolgozok){
 	let legidosebb="";
     let kor=Dolgozok[0].kor;
-    for (i=1; i<Dolgozok.length; i++){
+    for (let i=1; i<Dolgozok.length; i++){
     	if (kor<Dolgozok[i].kor){
         	kor=Dolgozok[i].kor;
             legidosebb=Dolgozok[i].nev;
