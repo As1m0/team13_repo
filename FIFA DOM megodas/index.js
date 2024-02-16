@@ -159,6 +159,7 @@ btn5.disabled = true;
 document.onkeyup = function () {
     if (input.value === "") {
         btn5.disabled = true;
+        document.querySelector("#f5p").innerHTML = "";
     } else {
         btn5.disabled = false;
     }
