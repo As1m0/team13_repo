@@ -135,7 +135,7 @@ btn4.addEventListener("click", legtobbetJavitoCsapatKiir);
 
 function szerepelE(array) {
     let keresendoNev = document.querySelector("#f5-input").value;
-    let output= false;
+    let output = false;
     for (let i = 0; i < array.length; i++) {
         if (array[i].nev.toLowerCase() === keresendoNev.toLowerCase()) {
             output = true;
@@ -146,18 +146,25 @@ function szerepelE(array) {
 
 function szerepelEKiir() {
     let eredmenyMezo = document.querySelector("#f5p");
-    if (document.querySelector("#f5-input").value == "") {
-        eredmenyMezo.innerHTML = "Adjon meg országot!";
+    if (szerepelE(fifaAdatok)) {
+        eredmenyMezo.innerHTML = "Szerepel";
     } else {
-        if (szerepelE(fifaAdatok)) {
-            eredmenyMezo.innerHTML = "Szerepel";
-        } else {
-            eredmenyMezo.innerHTML = "Nem szerepel";
-        }
+        eredmenyMezo.innerHTML = "Nem szerepel";
     }
 }
 
 const btn5 = document.querySelector("#f5Btn");
+const input = document.querySelector("#f5-input");
+btn5.disabled = true;
+document.onkeyup = function () {
+    if (input.value === "") {
+        btn5.disabled = true;
+    } else {
+        btn5.disabled = false;
+    }
+}
+
+
 btn5.addEventListener("click", szerepelEKiir);
 
 //6. feladat
@@ -195,10 +202,10 @@ function orszagSzamlalo(array, valtozasok) {
 
 function valtozasStatisztikaKiir() {
 
-    let valtozasok= valtozasStatisztika(fifaAdatok);
+    let valtozasok = valtozasStatisztika(fifaAdatok);
     let szamlalo = orszagSzamlalo(fifaAdatok, valtozasok);
     let array = [];
-    for (let i=0; i<valtozasok.length; i++){
+    for (let i = 0; i < valtozasok.length; i++) {
         let object = {};
         object.valt = valtozasok[i];
         object.orszagSzam = szamlalo[i];
