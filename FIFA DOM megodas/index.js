@@ -135,13 +135,13 @@ btn4.addEventListener("click", legtobbetJavitoCsapatKiir);
 
 function szerepelE(array) {
     let keresendoNev = document.querySelector("#f5-input").value;
+    let output= false;
     for (let i = 0; i < array.length; i++) {
         if (array[i].nev.toLowerCase() === keresendoNev.toLowerCase()) {
-            return true;
-        } else {
-            return false;
+            output = true;
         }
     }
+    return output;
 }
 
 function szerepelEKiir() {
