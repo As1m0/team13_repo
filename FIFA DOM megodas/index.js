@@ -26,8 +26,10 @@ const csapatAdat = [
     "Uruguay;6;-1;1639"
 ];
 
+//objektum-os tömb létrehozása
 function ObjektumFeltolto(feltoltendoElem) {
     let beolvasottAdatok = [];
+    feltoltendoElem.reverse();
     for (let i = 0; i < feltoltendoElem.length; i++) {
         let objektum = {};
         let daraboltAdatSor = feltoltendoElem[i].split(";");
@@ -40,6 +42,41 @@ function ObjektumFeltolto(feltoltendoElem) {
     return beolvasottAdatok;
 }
 const fifaAdatok = ObjektumFeltolto(csapatAdat);
+
+//0. feladat - csapatlista kiirasa
+const felugroAblak = document.querySelector('#csapat-lista-ablak');
+const mainContainer = document.querySelector("#main-container");
+
+function csapatLista(array) {
+    felugroAblak.style.display = "block";
+    mainContainer.style.filter = "blur(2px)";
+
+    let table = document.querySelector('#csapat-lista-table');
+
+    // táble sorainak egyszeri kigenerálás védelme
+    if (table.rows.length > 2) {
+        table.deleteRow(table.rows.length);
+    }
+
+    for (let i = 0; i < array.length; i++) {
+        let adatSor = table.insertRow(1);
+        let csapat = adatSor.insertCell(0);
+        let helyezes = adatSor.insertCell(1);
+        let valtozas = adatSor.insertCell(2);
+        let pont = adatSor.insertCell(3);
+        csapat.innerHTML = array[i].nev;
+        helyezes.innerHTML = array[i].helyezes;
+        valtozas.innerHTML = array[i].valtozas;
+        pont.innerHTML = array[i].pont;
+    }
+}
+
+const closeButton = document.querySelector('#close-button');
+closeButton.addEventListener("click", function () {
+    felugroAblak.style.display = "none";
+    mainContainer.style.filter = "blur(0px)";
+})
+
 
 //1. feladat
 
@@ -90,6 +127,12 @@ function atlagFelettiCsapatok(array) {
 function atlagFelettiCsapatokKiir() {
     let object = atlagFelettiCsapatok(fifaAdatok);
     let table = document.querySelector("#f3table");
+
+    // táble sorainak egyszeri kigenerálás védelme
+    if (table.rows.length > 2) {
+        table.deleteRow(table.rows.length);
+    }
+
     for (let i = 0; i < object.length; i++) {
         let adatSor = table.insertRow(1);
         let nev = adatSor.insertCell(0);
@@ -119,6 +162,12 @@ function legtobbetJavitoCsapat(array) {
 function legtobbetJavitoCsapatKiir() {
     let csapat = legtobbetJavitoCsapat(fifaAdatok);
     let table = document.querySelector("#f4table");
+
+    // táble sorainak egyszeri kigenerálás védelme
+    if (table.rows.length > 1) {
+        table.deleteRow(table.rows.length);
+    }
+
     let adatSor = table.insertRow(1);
     let helyezes = adatSor.insertCell(0);
     let nev = adatSor.insertCell(1);
@@ -132,6 +181,8 @@ const btn4 = document.querySelector("#f4Btn");
 btn4.addEventListener("click", legtobbetJavitoCsapatKiir);
 
 //5. feladat
+const btn5 = document.querySelector("#f5Btn");
+const input = document.querySelector("#f5-input");
 
 function szerepelE(array) {
     let keresendoNev = document.querySelector("#f5-input").value;
@@ -147,17 +198,16 @@ function szerepelE(array) {
 function szerepelEKiir() {
     let eredmenyMezo = document.querySelector("#f5p");
     if (szerepelE(fifaAdatok)) {
-        eredmenyMezo.innerHTML = "Szerepel";
+        eredmenyMezo.innerHTML = input.value + " szerepel a csapatok között";
     } else {
-        eredmenyMezo.innerHTML = "Nem szerepel";
+        eredmenyMezo.innerHTML = input.value + " NEM szerepel a csapatok között";
     }
 }
 
-const btn5 = document.querySelector("#f5Btn");
-const input = document.querySelector("#f5-input");
+
 btn5.disabled = true;
 document.onkeyup = function () {
-    if (input.value === "") {
+    if (input.value.length <= 4) {
         btn5.disabled = true;
         document.querySelector("#f5p").innerHTML = "";
     } else {
@@ -214,6 +264,12 @@ function valtozasStatisztikaKiir() {
     }
 
     let table = document.querySelector("#f6table");
+
+    // táble sorainak egyszeri kigenerálás védelme
+    if (table.rows.length > 2) {
+        table.deleteRow(table.rows.length);
+    }
+
     for (let i = 0; i < array.length; i++) {
         let adatSor = table.insertRow(1);
         let pont = adatSor.insertCell(0);

@@ -1,0 +1,104 @@
+body {
+    background-color: #545825;
+    background-image: url("https://img.redbull.com/images/c_crop,x_0,y_0,h_1728,w_3840/c_fill,w_1950,h_864/q_auto,f_auto/redbullcom/2020/10/13/vqmfrrhpmq5lkspw2vaw/fifa-21-chelsea-header");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 2050px;
+}
+
+h1 {
+    color: #2d6491;
+}
+
+.eredmeny {
+    display: block;
+    height: 50px;
+}
+
+.btn {
+    transition: all .5s;
+}
+
+.btn:active {
+    background-color: black;
+}
+
+.container {
+    max-width: 900px;
+    background-color: white;
+    box-shadow: 10px 10px 40px rgba(0, 0, 0, 0.15);
+    margin-top: 2vw;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 80px;
+    transition: all .15s linear;
+}
+
+h5 {
+    text-align: center;
+    color: white;
+    font-size: 12px;
+    letter-spacing: 10px;
+    padding-top: 2vw;
+    ;
+}
+
+#fifa-logo {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    margin: 10px auto;
+    filter: hue-rotate(355deg);
+    padding-top: 10px;
+}
+
+#csapatok-listaja {
+    background-color: #2d6491;
+    border: none;
+}
+
+#csapatok-listaja:hover {
+    background-color: #13436b;
+}
+
+#csapatok-listaja:active {
+    background-color: #0d375b;
+}
+
+#csapat-lista-ablak {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 600px;
+    z-index: 100;
+    top: 70px;
+    transition: ;
+}
+
+#close-button {
+    display: block;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    color: white;
+    text-align: center;
+    padding-top: 3px;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin: 5px;
+    transition: all .3s ease;
+    background-color: rgb(219, 225, 235);
+}
+
+#close-button:hover {
+    background-color: #a1a1a1;
+}
+
+#csapat-lista-table {
+    margin-top: 50px;
+}
