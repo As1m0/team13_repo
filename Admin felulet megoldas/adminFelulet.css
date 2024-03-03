@@ -1,0 +1,28 @@
+body {
+    background: #141E30;
+    /* fallback for old browsers */
+    /* background: -webkit-linear-gradient(to bottom, #243B55, #141E30);*/
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #243B55, #141E30);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    height: 100vh;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 600px;
+    border-radius: 10px;
+}
+
+label,
+h1 {
+    color: white;
+}
+
+form {
+    padding: 10px;
+}
+
+.btn {
+    width: 170px;
+}
