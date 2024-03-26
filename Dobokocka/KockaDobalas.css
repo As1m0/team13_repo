@@ -1,0 +1,16 @@
+#igazito {
+    margin: 30px auto;
+    width: 340px;
+
+}
+
+.kocka {
+    width: 100px;
+    height: 100px;
+    background-image: none;
+    display: inline-block;
+}
+
+table td img{
+    width: 20px;
+}
