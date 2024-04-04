@@ -1,0 +1,38 @@
+1) Legkülső div elem azonosító "container"
+2)	Egyes szintű címsor tartalma (innerHTML)
+3) Első input mező típusa text
+4) Első input mező azonosítója "veznev"
+5)	 Első input mező bootstrap osztálya "form-control"
+6) Második input mező típusa text
+7) Másidik input mező azonosítója "kernev"
+8) Második input mező bootstrap osztálya "form-control"
+9) Harmadik input mező típusa text
+10) Harmadik input mező azonosítója fnev
+11) Harmadik input mező bootstrap osztálya "form-control"
+12) Negyedik input mező típusa password
+13) Negyedik input mező azonosítója pass1
+14) Negyedik input mező bootstrap osztálya "form-control"
+15) Ötödik input mező típusa password
+16) Ötödik input mező azonosítója pass2
+17) Ötödik input mező bootstrap osztálya "form-control"
+18) Hatodik input mező azonosító email
+19) Hatodik input mező típusa email
+20) Hatodik input mező bootstrap osztálya "form-control"
+21) Hetedik input mező típusa tel
+22) Hetedik input mező azonosítója tel
+23) Hetedik input mező bootstrap osztálya "form-control"
+24) Esetleg form-control osztály azonosítót megnézed, minden mezőhöz hozzá van-e rendelve...
+25) Elsőtől- hetedik label tartalma...
+26) Felhasználói név alatti "üzenet" osztályai
+27) Felhasználói név alatti "üzenet" tartalma
+28) E-mail mező alatti "üzenet" osztályai 
+29) E-mail mező alatti "üzenet" tartalma
+30) Telefon mező alatti "üzenet" osztályai 
+31) Telefon mező alatti "üzenet" tartalma
+32) Akár egyeben is le lehet ellenőrizni a small mezőkhöz tartozó osztályokat!
+33) Gomb alapértelmezett bootstrap osztálya
+34) Gomb színe
+35) Gomb méretének módosítása, "form-control" segítségével
+36) Gomb felirata (annak tartalma: innerHtml)
+37) Select mezőben lévő elemek száma
+38) Select mezőben kiválasztott elemnek az értéke!
