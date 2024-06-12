@@ -1,0 +1,27 @@
+{
+  "name": "hero_generator_ui",
+  "product name": "Hero Image Generator",
+  "version": "1.0.0",
+  "description": "App to generate promotion hero images for webshops",
+  "main": "main.js",
+  "engines": {
+    "node": "^22.2.0"
+  },
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-rebuild"
+  },
+  "keywords": [],
+  "author": "Abel Ujvarossy",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^30.1.0",
+    "electron-rebuild": "^3.2.9"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2",
+    "react-scripts": "^3.0.1",
+    "sharp": "^0.33.4"
+  },
+  "asar": true
+}

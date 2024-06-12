@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    font-family: Roboto, sans-serif;
+    background-color: rgb(225, 236, 243);
+}
+
+h1 {
+    font-family: Audiowide, sans-serif;
+}
+
+#generating-btn {
+    font-family: Audiowide, sans-serif;
+    box-shadow: 10px 10px 30px rgb(255, 255, 255);
+}
+
+.step {
+    position: relative;
+    background-color: rgba(255,255,255,.6);
+    text-align: center;
+    min-height: 340px;
+    padding: 20px;
+    margin: 5px -7px;
+    border-radius: 30px;
+    box-shadow: 5px 5px 30px rgba(160, 78, 236, .2);
+}
+
+.step h3 {
+    font-size: 22px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.step-status {
+    color: blueviolet;
+    opacity: .7;
+    margin: auto;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.input {
+    background-color: black;
+}
+
+
+input[type="file"] {
+    display: none;
+    /* Hide the actual file input */
+}
+
+.custom-file-upload {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 30px;
+    width: 80%;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: blueviolet;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    box-shadow: 2px 2px 10px rgba(160, 78, 236, .5);
+}
+
+.custom-file-upload:hover {
+    background-color: rgb(160, 78, 236);
+}
+
+#imagePreview img {
+    width: 55%;
+    margin: -5px auto;
+}
+
+#fileList {
+    font-size: 8px;
+    color: rgb(136, 136, 136);
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-height: 300px;
+    width: 80%;
+}
+
+li {
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.step-number {
+    position: absolute;
+    background-color: rgb(160, 78, 236);
+    color: white;
+    font-family: Audiowide, sans-serif;
+    font-size: 26px;
+    text-align: center;
+    padding-top: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -25px;
+    box-shadow: 2px 2px 5px rgba(160, 78, 236, .5);
+    transition: all ease .5s;
+}
+
+#draw-safe-zone {
+    text-align: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .8);
+}
+
+#draw-safe-zone h3 {
+    color: white;
+    margin-top: 25px;
+    background-color: rgb(160, 78, 236);
+    padding: 15px;
+}
+
+#draw-safe-zone p {
+    font-size: 16px;
+    color: rgb(255, 255, 255);
+}
+
+#close-window{
+    color: white;
+    font-size: 20px;
+    padding: 5px;
+    position: fixed;
+    right: 20px;
+    top: 35px;
+    cursor: pointer;
+}
+
+#close-window:hover{
+    color: rgba(255,255,255,.6);
+}
+
+#my-canvas {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    background-image: url('#    ');
+    background-repeat: none;
+    background-size: cover;
+    top: 20%;
+    margin: auto;
+    cursor: crosshair;
+    border: none;
+}
+
+
+
+form{
+    width: 80%;
+    border: none !important;
+    outline: none;
+    background-color: transparent !important;
+
+}
+
+input, option, select{
+    width: 100%;
+    text-align: center;
+    color: rgb(160, 78, 236) !important;
+}
+
+#quality-value{
+    color: rgb(160, 78, 236);
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.col-6{
+   margin: 10px auto;
+   padding: 2px;
+}
+
+select{
+    margin-bottom: 20px;
+}
+
+
+#progress-bar{
+    position: fixed;
+    color: black;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 20px;
+    overflow: hidden;
+    text-align: center;
+    background-color:transparent;
+    font-weight: bold;
+}
+
+#fill{
+    width: 0%;
+    height: 100%;
+    position: relative;
+    left: 0px;
+    background-color: blueviolet;
+    transition: all ease .3s;
+}
