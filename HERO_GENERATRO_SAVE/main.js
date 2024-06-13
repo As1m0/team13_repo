@@ -1,5 +1,5 @@
 const { app, BrowserWindow, Menu, ipcMain, shell } = require('electron');
-const isDew = process.env.NODE_ENV == "production";
+const isDew = process.env.NODE_ENV === "production";
 const isMac = process.platform === "darwin";
 const sharp = require('sharp');
 const path = require('path');
@@ -40,6 +40,10 @@ app.whenReady().then(() => {
   const mainMenu = Menu.buildFromTemplate(menu);
   Menu.setApplicationMenu(mainMenu);
 
+
+  // Remove mainWindow from memory close
+  mainWindow.on('closed', () => (mainWindow = null));
+
   app.on('active', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createMainWindow();
@@ -62,8 +66,6 @@ const menu = [
   }
 ]
 
-// Remove mainWindow from memory close
-//mainWindow.on('closed', () => (mainWindow = null));
 
 app.on('window-all-closed', () => {
   if (!isMac) {
@@ -80,16 +82,32 @@ ipcMain.on('startGenerating', (e, options) => {
 
 
 async function generateImages({ masterImagePath, directoryPath, outPutParameters, safeZoneData }) {
+
+  //delete temp files if lefted any
+  let pngFilesAfterTrim = await fsPromises.readdir(directoryPath);
+
+  await Promise.all(pngFilesAfterTrim.map(async (file) => {
+    const filePath = path.join(directoryPath, file);
+    if (path.extname(file).toLowerCase() === '.png' && file.includes('_temp')) {
+      await fsPromises.unlink(filePath);
+    }
+  }));
+
+  // resize and conver to pgn
   await resizeAndConvertToPng(directoryPath, outPutParameters);
+
+  pngFilesAfterTrim = await fsPromises.readdir(directoryPath);
+
 
   // Trim all PNG files in the input directory
   const pngFiles = await fsPromises.readdir(directoryPath);
-  const pngFilesToTrim = pngFiles.filter(file => path.extname(file).toLowerCase() === '.png'  && file.includes('_temp'));
+  const pngFilesToTrim = pngFiles.filter(file => path.extname(file).toLowerCase() === '.png' && file.includes('_temp'));
 
   await Promise.all(pngFilesToTrim.map(async (file) => {
     const inputImagePath = path.join(directoryPath, file);
-    await trimAndOverwriteImage(inputImagePath);
+    await cropWhiteSpace(inputImagePath);
   }));
+
 
   // Continue with image merging
   const image1 = sharp(masterImagePath);
@@ -97,18 +115,16 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
 
 
 
-  const pngFilesAfterTrim = await fsPromises.readdir(directoryPath);
-
   await Promise.all(pngFilesAfterTrim.map(async (file) => {
-    if (path.extname(file).toLowerCase() === '.png'  && file.includes('_temp')) {
+    if (path.extname(file).toLowerCase() === '.png' && file.includes('_temp')) {
       const inputImagePath = path.join(directoryPath, file);
       const image2 = sharp(inputImagePath);
 
       const canvasWidth = outPutParameters[0];
       const canvasHeight = outPutParameters[1];
       const canvas = sharp({ create: { width: canvasWidth, height: canvasHeight, channels: 4, background: 'white' } });
-
-      const imageRatio = image2.options.width / image2.options.height;
+      const { width, height } = await image2.metadata();
+      const imageRatio = width / height;
       const centerX = safeZoneData[0] * canvasWidth;
       const centerY = safeZoneData[1] * canvasHeight;
       const currentWidth = safeZoneData[2] * outPutParameters[0];
@@ -117,7 +133,7 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
       let newHeight;
 
       // Calculate resized dimensions based on available area
-      if (image2.options.width > image2.options.height) {
+      if (width > height) {
         if (currentWidth / imageRatio < currentHeight) {
           newWidth = currentWidth;
           newHeight = currentWidth / imageRatio;
@@ -125,7 +141,7 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
           newHeight = currentHeight;
           newWidth = currentHeight * imageRatio;
         }
-      } else if (image2.options.width < image2.options.height) {
+      } else if (width < height) {
         if (currentHeight * imageRatio < currentHeight) {
           newHeight = currentHeight;
           newWidth = currentHeight * imageRatio;
@@ -136,7 +152,7 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
       }
 
       //ha a kivágott kép oldalaránya közel 1
-      if (Math.abs(image2.options.width - image2.options.height) < 200) {
+      if (Math.abs(width - height) < 100) {
         if (currentHeight < currentWidth) {
           newHeight = currentHeight;
           newWidth = currentHeight * imageRatio;
@@ -149,7 +165,7 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
 
 
       //Make output folder
-      const outputFolderPath = directoryPath+ '/hero images';
+      const outputFolderPath = masterImagePath.slice(0, masterImagePath.lastIndexOf('/')) + '/hero images';
       try {
         if (!fs.existsSync(outputFolderPath)) {
           fs.mkdirSync(outputFolderPath);
@@ -160,28 +176,29 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
 
       // Merge images
       await canvas.composite([
-        { input: await image2.resize(Math.floor(newWidth), Math.floor(newHeight)).toBuffer(), left: Math.floor(centerX-newWidth/2), top: Math.floor(centerY-newHeight/2) },
+        { input: await image2.resize(Math.floor(newWidth), Math.floor(newHeight)).toBuffer(), left: Math.floor(centerX - newWidth / 2), top: Math.floor(centerY - newHeight / 2) },
         { input: await image1.toBuffer(), left: 0, top: 0 }
       ]);
 
       const originalFileName = path.parse(file).name;
       const zeroNumber = countZeros(originalFileName);
-      const outputFileName = file.substring(0, 16).slice(zeroNumber).replace(/-T.*/, '').split('_')[0].split('.')[0] + '.'+outPutParameters[2];
+      const outputFileName = file.substring(0, 16).slice(zeroNumber).replace(/-T.*/, '').split('_')[0].split('.')[0] + '.' + outPutParameters[2];
       const outputPath = path.join(outputFolderPath, outputFileName);
-      
+
       // output images to files
-      await canvas.toFile(outputPath,{ format: outPutParameters[2] },{ quality: outPutParameters[3]*10 });
+      await canvas.toFile(outputPath, { format: outPutParameters[2] }, { quality: outPutParameters[3] * 10 });
       console.log(`Merged image saved as ${outputFileName}`);
 
-      //open image folder
-      shell.openPath(outputFolderPath);
 
-      //Feedback message
+      //progressbar status send
       progressStatus = filesNumber;
-      mainWindow.webContents.send('progressbar', progressStatus / filesNumber *100);
+      mainWindow.webContents.send('progressbar', progressStatus / filesNumber * 100);
       progressStatus = 0;
       //stop button set back
       mainWindow.webContents.send('button');
+
+      //open image folder
+      shell.openPath(outputFolderPath);
     }
   }));
 
@@ -190,14 +207,14 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
   }
 
   // Cleanup: Delete all PNG files after merging
-  
+
   await Promise.all(pngFilesAfterTrim.map(async (file) => {
     const filePath = path.join(directoryPath, file);
     if (path.extname(file).toLowerCase() === '.png' && file.includes('_temp')) {
       await fsPromises.unlink(filePath);
     }
   }));
-  
+
 }
 
 async function resizeAndConvertToPng(directoryPath, outputParameters) {
@@ -218,111 +235,66 @@ async function resizeAndConvertToPng(directoryPath, outputParameters) {
 
     console.log(`Resized and converted ${path.parse(file).name} to ${path.parse(file).name}.png`);
     progressStatus++;
-      mainWindow.webContents.send('progressbar', progressStatus / filesNumber *100);
+    mainWindow.webContents.send('progressbar', progressStatus / filesNumber * 100);
   }));
 }
 
 
-
-async function trimAndOverwriteImage(imagePath) {
+async function cropWhiteSpace(inputPath) {
   try {
-    const image = sharp(imagePath);
+    const image = sharp(inputPath);
 
-    // Get image metadata and raw pixel data
+    // Extract metadata to get the dimensions
+    const { width, height } = await image.metadata();
+
+    // Convert image to raw pixel data
     const { data, info } = await image.raw().toBuffer({ resolveWithObject: true });
-    const { width, height } = info;
 
-    // Find top, bottom, left, and right trims
-    const { topTrim, bottomTrim, leftTrim, rightTrim } = findTrimBounds(data, width, height);
+    // Create arrays to store the min and max values of non-white pixels
+    let top = height, bottom = 0, left = width, right = 0;
 
-    // Calculate new dimensions after trimming
-    const newWidth = width - leftTrim - rightTrim;
-    const newHeight = height - topTrim - bottomTrim;
+    // Helper function to check if a pixel is white
+    const isWhite = (r, g, b) => r > 250 && g > 250 && b > 250;
 
-    // Check if there is anything to trim
-    if (newWidth > 0 && newHeight > 0) {
-      const tempFilePath = path.join(os.tmpdir(), `trimmed_${path.basename(imagePath)}`);
-
-      // Extract the bounding box and save to a temporary file
-      await sharp(imagePath)
-        .extract({ left: leftTrim, top: topTrim, width: newWidth, height: newHeight })
-        .toFile(tempFilePath);
-
-      // Replace the original image with the trimmed image
-      fs.copyFileSync(tempFilePath, imagePath);
-
-      // Delete the temporary file
-      fs.unlinkSync(tempFilePath);
+    // Loop through the pixels to find the bounds of the non-white areas
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const index = (y * width + x) * info.channels;
+        const r = data[index];
+        const g = data[index + 1];
+        const b = data[index + 2];
+        if (!isWhite(r, g, b)) {
+          if (y < top) top = y;
+          if (y > bottom) bottom = y;
+          if (x < left) left = x;
+          if (x > right) right = x;
+        }
+      }
     }
+
+    // Calculate the crop area
+    const cropWidth = right - left + 1;
+    const cropHeight = bottom - top + 1;
+
+
+    const tempFilePath = path.join(os.tmpdir(), `trimmed_${path.basename(inputPath)}`);
+
+    // Perform the crop and save the image to a new file
+    const outputPath = 'images/cropped_image.png';
+    await image.extract({ left, top, width: cropWidth, height: cropHeight })
+      .toFormat('png')  // Explicitly set the output format to PNG
+      .toFile(tempFilePath);
+
+    fs.copyFileSync(tempFilePath, inputPath);
+
+    // Delete the temporary file
+    fs.unlinkSync(tempFilePath);
+
+    console.log('Image cropped successfully. Saved as:', outputPath);
   } catch (error) {
-    console.error("An error occurred:", error);
+    console.error('Error cropping the image:', error);
   }
 }
-
-
-
-
-
-function findTrimBounds(pixels, width, height) {
-  let topTrim = 0;
-  let bottomTrim = 0;
-  let leftTrim = 0;
-  let rightTrim = 0;
-
-  // Find top trim (count consecutive white rows from top)
-  while (topTrim < height && isRowWhite(pixels, width, topTrim)) {
-    topTrim++;
-  }
-
-  // Find bottom trim (count consecutive white rows from bottom)
-  while (bottomTrim < height && isRowWhite(pixels, width, height - 1 - bottomTrim)) {
-    bottomTrim++;
-  }
-
-  // Find left trim (count consecutive white columns from left)
-  while (leftTrim < width && isColumnWhite(pixels, width, height, leftTrim)) {
-    leftTrim++;
-  }
-
-  // Find right trim (count consecutive white columns from right)
-  while (rightTrim < width && isColumnWhite(pixels, width, height, width - 1 - rightTrim)) {
-    rightTrim++;
-  }
-
-  //console.log(topTrim, bottomTrim, leftTrim, rightTrim);
-  return { topTrim, bottomTrim, leftTrim, rightTrim };
-}
-
-function isRowWhite(pixels, width, rowIndex) {
-  const startIndex = rowIndex * width * 4;
-  const endIndex = startIndex + width * 4;
-  for (let i = startIndex; i < endIndex; i += 4) {
-    const r = pixels[i];
-    const g = pixels[i + 1];
-    const b = pixels[i + 2];
-    const a = pixels[i + 3];
-    if (r !== 255 || g !== 255 || b !== 255 || a !== 255) {
-      return false; // Found a non-white pixel
-    }
-  }
-  return true; // All pixels in the row are white
-}
-
-function isColumnWhite(pixels, width, height, colIndex) {
-  const startIndex = colIndex * 4;
-  for (let rowIndex = 0; rowIndex < height; rowIndex++) {
-    const pixelIndex = startIndex + rowIndex * width * 4;
-    const r = pixels[pixelIndex];
-    const g = pixels[pixelIndex + 1];
-    const b = pixels[pixelIndex + 2];
-    const a = pixels[pixelIndex + 3];
-    if (r !== 255 || g !== 255 || b !== 255 || a !== 255) {
-      return false; // Found a non-white pixel
-    }
-  }
-  return true; // All pixels in the column are white
-}
-
 
 
 

@@ -8,9 +8,9 @@ var rectWidth = 0;
 var rectHeight = 0;
 
 // Function to draw a rectangle
-function drawRectangle(x, y, width, height) {
+function drawRectangle(x, y, width, height, color) {
   ctx.clearRect(0, 0, myCanvas.width, myCanvas.height); // Clear the canvas
-  ctx.fillStyle = "rgba(180,47,236,0.5)"; // Semi-transparent red
+  ctx.fillStyle = color; 
   ctx.fillRect(x, y, width, height); // Draw the rectangle
 }
 
@@ -22,7 +22,7 @@ myCanvas.addEventListener('mousedown', function (e) {
 
 myCanvas.addEventListener('mousemove', function (e) {
   if (e.buttons === 1) { // If mouse button is pressed
-    drawRectangle(rectX, rectY, e.offsetX - rectX, e.offsetY - rectY);
+    drawRectangle(rectX, rectY, e.offsetX - rectX, e.offsetY - rectY, "rgba(180,47,236,0.5)");
     rectWidth = e.offsetX - rectX;
     rectHeight = e.offsetY - rectY;
   }
@@ -41,10 +41,12 @@ myCanvas.addEventListener('mouseup', function (e) {
     Math.abs(rectHeight) / myCanvas.height
   ];
 
-  //console.log(safeZoneData);
+  drawRectangle(rectX, rectY, e.offsetX - rectX, e.offsetY - rectY, "rgba(0,255,0,0.5)")
 
-  ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
-  drawBox.style.display = 'none';
-  stepNumbers[1].innerHTML = "&check;";
-  stepNumbers[1].style.backgroundColor = "#4dc13d";
+  setTimeout(function () {
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height);
+    drawBox.style.display = 'none';
+    stepNumbers[1].innerHTML = "&check;";
+    stepNumbers[1].style.backgroundColor = "#4dc13d";
+  }, 500);
 });

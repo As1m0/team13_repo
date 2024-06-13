@@ -102,14 +102,17 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-/*
+
 document.getElementById("close-window").addEventListener("click", () =>{
     preview.style.display = 'none';
     drawBox.style.display = 'none';
     masterStatus.style.color = 'rgb(160, 78, 236)';
     masterStatus.textContent = 'add image';
+    masterImageOK = false;
+    canStartGenerate();
+    myCanvas.style.backgroundImage = "";
 })
-*/
+
 
 
 let button = document.getElementById('generating-btn');
@@ -154,13 +157,11 @@ let progressBar = document.getElementById('progress-bar');
 
 // Catch the progress bar data
 ipcRenderer.on('progressbar', (value) => {
-    //progressBar.innerHTML = Math.floor(value);
     fill.style.width = Math.round(value) + '%';
 })
 
 // enable button
 ipcRenderer.on('button', () => {
     button.classList.remove('disabled');
-    progressBar.innerHTML = "Done!";
-    fill.style.width = '100%';
+    fill.style.width = '0%';
 })
