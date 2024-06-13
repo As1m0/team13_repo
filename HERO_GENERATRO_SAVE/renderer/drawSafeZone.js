@@ -48,5 +48,5 @@ myCanvas.addEventListener('mouseup', function (e) {
     drawBox.style.display = 'none';
     stepNumbers[1].innerHTML = "&check;";
     stepNumbers[1].style.backgroundColor = "#4dc13d";
-  }, 500);
+  }, 300);
 });

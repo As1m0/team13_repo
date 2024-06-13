@@ -15,8 +15,11 @@ function createMainWindow() {
   mainWindow = new BrowserWindow({
     title: 'Hero image generator',
     width: isDew ? 1500 : 1000,
-    height: 660,
-    icon: 'icon.ico',
+    height: 700,
+    minHeight: 700,
+    maxHeight: 700,
+    minWidth: 1000,
+    maxWidth: 1000,
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: true,
@@ -81,7 +84,7 @@ ipcMain.on('startGenerating', (e, options) => {
 })
 
 
-async function generateImages({ masterImagePath, directoryPath, outPutParameters, safeZoneData }) {
+async function generateImages({ masterImagePath, directoryPath, outPutParameters, safeZoneData, EAN }) {
 
   //delete temp files if lefted any
   let pngFilesAfterTrim = await fsPromises.readdir(directoryPath);
@@ -180,10 +183,18 @@ async function generateImages({ masterImagePath, directoryPath, outPutParameters
         { input: await image1.toBuffer(), left: 0, top: 0 }
       ]);
 
-      const originalFileName = path.parse(file).name;
-      const zeroNumber = countZeros(originalFileName);
-      const outputFileName = file.substring(0, 16).slice(zeroNumber).replace(/-T.*/, '').split('_')[0].split('.')[0] + '.' + outPutParameters[2];
-      const outputPath = path.join(outputFolderPath, outputFileName);
+      //Declare output files name
+      let originalFileName = path.parse(file).name;
+      let outputPath = "";
+      let outputFileName= "";
+      if (EAN) {
+        const zeroNumber = countZeros(originalFileName);
+        outputFileName = file.substring(0, 16).slice(zeroNumber).replace(/-T.*/, '').split('_')[0].split('.')[0] + '.' + outPutParameters[2];
+        outputPath = path.join(outputFolderPath, outputFileName);
+      } else {
+        outputPath = path.join(outputFolderPath, originalFileName.slice(0, originalFileName.lastIndexOf('_temp')) + '.' + outPutParameters[2]);
+      }
+
 
       // output images to files
       await canvas.toFile(outputPath, { format: outPutParameters[2] }, { quality: outPutParameters[3] * 10 });

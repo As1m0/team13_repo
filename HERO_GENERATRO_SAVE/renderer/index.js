@@ -21,6 +21,10 @@ const outputHeight = document.getElementById("output-height");
 const FileFormat = document.getElementById("file-format");
 const customQuality = document.getElementById("quality");
 const customQualityLabel = document.getElementById("quality-value");
+const radioInput = document.getElementById("original");
+
+const filesImage = document.getElementById("filesImage");
+const imageCounter = document.getElementById("image-counter");
 
 customQuality.addEventListener('input', function () {
     customQualityLabel.innerText = customQuality.value;
@@ -44,10 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (onlyImages.length > 0) {
             // Extract the common folder path
-            inputStatus.innerHTML = "&check; " + onlyImages.length + " files found";
+            inputStatus.innerHTML = "&check; found images";
             inputStatus.style.color = "green";
             inputStatus.style.fontWeight = "bold";
             stepNumbers[0].innerHTML = "&check;";
+            filesImage.style.display = "block"
+            imageCounter.innerHTML = onlyImages.length;
             stepNumbers[0].style.backgroundColor = "#4dc13d";
             inputFolderOK = true;
 
@@ -61,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
             inputStatus.textContent = "No image files found";
             inputStatus.style.color = "red";
             inputStatus.style.fontWeight = "bold";
+            filesImage.style.display = "none"
             stepNumbers[0].innerHTML = "1";
             stepNumbers[0].style.backgroundColor = "rgb(160, 78, 236)";
         }
@@ -139,12 +146,20 @@ button.addEventListener('click', function () {
     let format = FileFormat.value;
     let quality = customQuality.value;
     let outPutParameters = [Number(width), Number(height), format, Number(quality)];
+    //file name
+    let EAN;
+    if (radioInput.checked){
+        EAN = true;
+    } else {
+        EAN = false;
+    }
 
     ipcRenderer.send('startGenerating', {
         masterImagePath,
         directoryPath,
         outPutParameters,
-        safeZoneData
+        safeZoneData,
+        EAN
     });
 
     // disable button
